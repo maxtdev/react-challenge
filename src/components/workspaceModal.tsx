@@ -3,10 +3,11 @@ import Image from 'next/image';
 interface WorkSpaceModalProps {
   data: any[];
   selectedIndex: number;
+  handleWorkspaceChange: (index: number) => void 
 }
 
 const WorkSpaceModal = (props: WorkSpaceModalProps) => {
-  const { data, selectedIndex } = props;
+  const { data, handleWorkspaceChange, selectedIndex } = props;
 
   if (data.length === 0) return;
   
@@ -24,6 +25,7 @@ const WorkSpaceModal = (props: WorkSpaceModalProps) => {
               ${isSelectedWorkspace ? 'bg-slate-100' : ''}
             `}
             key={`${element.name}`}
+            onClick={() => handleWorkspaceChange(index)}
           >
             <div className="flex">
               <Image className="rounded-full" width="30" height="30" alt={element.name} src={element.headurl} />

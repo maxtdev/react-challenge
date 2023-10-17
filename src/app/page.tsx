@@ -70,13 +70,20 @@ export default function Home() {
       .finally(() => setLoading(false));
   };
 
+  const handleWorkspaceChange = (index: number) => {
+    setSelected(index);
+  }
+
   return (
     <div className="container relative flex justify-items-start w-full">
       <div className="bg-white py-8 px-2 w-80">
         <Image className="cursor-pointer" src="/logo.png" alt="logo" width={168} height={40} />
         <div className="border-2 p-4 mt-2 rounded-xl">
-          <button className="flex align-middle items-center" onMouseOver={() => handleMouseMove()}>
-            <span>Selected Workspace</span>
+          <button className="flex items-center justify-between" onMouseOver={() => handleMouseMove()}>
+            <div className="flex">
+              <Image className="rounded-full" width="30" height="30" alt={data[selected].name} src={data[selected].headurl} />
+              <span className="pt-1 pl-2">{data[selected].name}</span>
+            </div>
             <div className="ml-3 pt-1 flex flex-col">
               <Image alt="chevron-up" src="/chevron-up.png" height="15" width="15" />
               <Image alt="chevron-down" src="/chevron-down.png" height="15" width="15" />
@@ -91,7 +98,16 @@ export default function Home() {
         <div className="flex absolute">
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal1" />
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal2" />
-          {showPortal && createPortal(<WorkSpaceModal data={data} selectedIndex={selected} />, firstDOMNode, null)}
+          {showPortal && 
+            createPortal(
+              <WorkSpaceModal 
+                data={data} 
+                selectedIndex={selected} 
+                handleWorkspaceChange={handleWorkspaceChange} 
+              />, 
+              firstDOMNode, 
+              null
+            )}
           {showPortal && createPortal(<StatisticsModal data={data} selectedIndex={selected} />, secondDOMNode, null)}
         </div> 
       </div>
