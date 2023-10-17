@@ -13,6 +13,8 @@ export default function Home() {
   const [firstDOMNode, setFirstDOMNode] = useState(null);
   const [secondDOMNode, setSecondDOMNode] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  // TODO: When connected remove the mocked data from here.
   const [data, setData] = useState<any[]>(mock);
   
   useEffect(() => {
@@ -32,16 +34,20 @@ export default function Home() {
   };
 
   const handleMouseMove = () => {
-    if (!showPortal && !loading) {
-      fetchData();
-      setLoading(true);
-    }
+    // TODO: Remove this comment when connected
+    // if (!showPortal && !loading) {
+      // fetchData();
+      // setLoading(true);
+    // }
+
+    setShowPortal(true);
   };
 
   const handleMouseOver = () => {
     if (showPortal) {
       setShowPortal(false);
     }
+    setLoading(false);
   };
 
   const fetchData = () => {
@@ -55,7 +61,7 @@ export default function Home() {
     fetch(URL, parameters)
       .then((response) => response.json())
       .then((data) => {
-        // validate that data is here
+        // TODO: Validate that data has the right format when connected
         setData(data); 
         setShowPortal(true);
       })
