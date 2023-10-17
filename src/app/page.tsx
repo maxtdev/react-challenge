@@ -82,7 +82,7 @@ export default function Home() {
       <div className="bg-white py-8 px-2 w-80">
         <Image className="cursor-pointer" src="/logo.png" alt="logo" width={168} height={40} />
         <div className="border-2 p-4 mt-2 rounded-xl">
-          <button className="flex items-center justify-between" onMouseOver={() => handleMouseMove()}>
+          <button className="flex items-center justify-between w-full" onMouseOver={() => handleMouseMove()}>
             <div className="flex">
               <Image className="rounded-full" width="30" height="30" alt={data?.[selected]?.name} src={data?.[selected]?.headurl} />
               <span className="pt-1 pl-2">{data?.[selected]?.name}</span>
