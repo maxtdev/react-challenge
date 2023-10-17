@@ -72,6 +72,9 @@ export default function Home() {
 
   const handleWorkspaceChange = (index: number) => {
     setSelected(index);
+    // TODO: Check if it's required to reload data when changing workspace
+    // setLoading(true);
+    // fetchData();
   }
 
   return (
