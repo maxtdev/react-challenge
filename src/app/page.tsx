@@ -32,9 +32,9 @@ export default function Home() {
   };
 
   const handleMouseMove = () => {
-    if (!showPortal) {
-      // fetchData();
-      setShowPortal(true);
+    if (!showPortal && !loading) {
+      fetchData();
+      setLoading(true);
     }
   };
 
@@ -52,11 +52,13 @@ export default function Home() {
       } 
     };
 
-    setLoading(true);
-
     fetch(URL, parameters)
       .then((response) => response.json())
-      .then((data) => setData(data))
+      .then((data) => {
+        // validate that data is here
+        setData(data); 
+        setShowPortal(true);
+      })
       .catch((error) => console.log('error', error))
       .finally(() => setLoading(false));
   };
