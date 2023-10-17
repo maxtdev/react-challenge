@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from 'next/image';
 import WorkSpaceModal from "@/components/workspaceModal";
@@ -10,10 +10,15 @@ import mock from '../mock/responseExample';
 
 export default function Home() {
   const [showPortal, setShowPortal] = useState(false);
+  const [firstDOMNode, setFirstDOMNode] = useState(null);
+  const [secondDOMNode, setSecondDOMNode] = useState(null);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any[]>(mock);
-  const firstModalDOMNode = document.getElementById('modal1') || null;
-  const secondModalDOMNode = document.getElementById('modal2') || null;
+  
+  useEffect(() => {
+    setFirstDOMNode(document.getElementById('modal1') || null);
+    setSecondDOMNode(document.getElementById('modal2') || null);
+  }, []);
 
   const renderLink = (link:any): any => {
     const { title, iconCode } = link;
@@ -69,8 +74,8 @@ export default function Home() {
         <div className="flex absolute">
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal1" />
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal2" />
-          {showPortal && createPortal(<WorkSpaceModal data={data} />, firstModalDOMNode, null)}
-          {showPortal && createPortal(<StatisticsModal data={data} />, secondModalDOMNode, null)}
+          {showPortal && createPortal(<WorkSpaceModal data={data} />, firstDOMNode, null)}
+          {showPortal && createPortal(<StatisticsModal data={data} />, secondDOMNode, null)}
         </div> 
       </div>
     </div>
