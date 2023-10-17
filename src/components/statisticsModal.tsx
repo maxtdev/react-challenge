@@ -34,7 +34,7 @@ const StatisticsModal = (props: StatisticsModalProps) => {
         const value = category?.[0]?.used || 0;
 
         return (
-          <div className="flex items-center p-3 hover:bg-slate-100 border-b-2 justify-between" key={`${key}-${index}`}>
+          <div className="flex items-center p-3 hover:bg-slate-100 border-b-2 justify-between cursor-pointer" key={`${key}-${index}`}>
             <span>{`${keyNames[key]}: ${value}`}</span>
             <Image className="rounded-full" width="20" height="20" alt={"plus"} src={'/plus-circle.png'} />
           </div>
