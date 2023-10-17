@@ -84,8 +84,8 @@ export default function Home() {
         <div className="border-2 p-4 mt-2 rounded-xl">
           <button className="flex items-center justify-between" onMouseOver={() => handleMouseMove()}>
             <div className="flex">
-              <Image className="rounded-full" width="30" height="30" alt={data[selected].name} src={data[selected].headurl} />
-              <span className="pt-1 pl-2">{data[selected].name}</span>
+              <Image className="rounded-full" width="30" height="30" alt={data?.[selected]?.name} src={data?.[selected]?.headurl} />
+              <span className="pt-1 pl-2">{data?.[selected]?.name}</span>
             </div>
             <div className="ml-3 pt-1 flex flex-col">
               <Image alt="chevron-up" src="/chevron-up.png" height="15" width="15" />
