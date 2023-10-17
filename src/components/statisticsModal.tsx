@@ -1,15 +1,31 @@
 import Image from 'next/image';
 
-const StatisticsModal = (props) => {
-  const { data } = props;
-  const keyNames = {
-    redirect: 'Redirects',
-    'short-url': 'Short Links',
-    monitor: 'Monitorings',
-    members: "Team Members"
-  };
+interface summaryItemI {
+  category: string;
+  used: number;
+}
+interface WorkspaceI {
+  summary: summaryItemI[],
+}
+interface StatisticsModalProps {
+  data: WorkspaceI[],
+}
 
-  if (!data && data.length === 0) return;
+type Keys = 'redirect' | 'short-url' | 'monitor' | 'members';
+
+const keyNames: {
+  [key in Keys]: string
+} = {
+  redirect: 'Redirects',
+  'short-url': 'Short Links',
+  monitor: 'Monitorings',
+  members: "Team Members"
+};
+
+const StatisticsModal = (props: StatisticsModalProps) => {
+  const { data } = props;
+
+  if (data.length === 0) return;
 
   return (
     <div className="my-2 bg-white shadow-sm z-10 flex-col">
@@ -26,6 +42,10 @@ const StatisticsModal = (props) => {
       })}
     </div>
   );
+};
+
+StatisticsModal.defaultProps = {
+  data: [],
 };
 
 export default StatisticsModal;

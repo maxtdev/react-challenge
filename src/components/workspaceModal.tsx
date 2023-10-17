@@ -1,11 +1,14 @@
 import Image from 'next/image';
 
-const WorkSpaceModal = (props) => {
-  const { data } = props;
-  if (!data || data.length === 0) return;
-  
-  console.log('a', data);
+interface WorkSpaceModalProps {
+  data: any[],
+}
 
+const WorkSpaceModal = (props: WorkSpaceModalProps) => {
+  const { data } = props;
+
+  if (data.length === 0) return;
+  
   return (
     <div className="my-2 p-2 bg-white shadow-sm">
       {data.map((element) => {
@@ -22,6 +25,10 @@ const WorkSpaceModal = (props) => {
       </div>
     </div>
   );
+};
+
+WorkSpaceModal.defaultProps = {
+  data: [],
 };
 
 export default WorkSpaceModal;
