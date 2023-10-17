@@ -12,6 +12,7 @@ export default function Home() {
   const [showPortal, setShowPortal] = useState(false);
   const [firstDOMNode, setFirstDOMNode] = useState(null);
   const [secondDOMNode, setSecondDOMNode] = useState(null);
+  const [selected, setSelected] = useState(0);
   const [loading, setLoading] = useState(false);
 
   // TODO: When connected remove the mocked data from here.
@@ -90,8 +91,8 @@ export default function Home() {
         <div className="flex absolute">
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal1" />
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal2" />
-          {showPortal && createPortal(<WorkSpaceModal data={data} />, firstDOMNode, null)}
-          {showPortal && createPortal(<StatisticsModal data={data} />, secondDOMNode, null)}
+          {showPortal && createPortal(<WorkSpaceModal data={data} selectedIndex={selected} />, firstDOMNode, null)}
+          {showPortal && createPortal(<StatisticsModal data={data} selectedIndex={selected} />, secondDOMNode, null)}
         </div> 
       </div>
       <div className="flex w-full" onMouseOver={() => handleMouseOver()} />

@@ -5,10 +5,11 @@ interface summaryItemI {
   used: number;
 }
 interface WorkspaceI {
-  summary: summaryItemI[],
+  summary: summaryItemI[];
 }
 interface StatisticsModalProps {
-  data: WorkspaceI[],
+  data: WorkspaceI[];
+  selectedIndex: number;
 }
 
 type Keys = 'redirect' | 'short-url' | 'monitor' | 'members';
@@ -23,14 +24,14 @@ const keyNames: {
 };
 
 const StatisticsModal = (props: StatisticsModalProps) => {
-  const { data } = props;
+  const { data, selectedIndex } = props;
 
   if (data.length === 0) return;
 
   return (
     <div className="my-2 bg-white shadow-sm z-10 flex-col">
       {Object.keys(keyNames).map((key, index) => {
-        const category = data[0].summary.filter(({ category }) => category === key);
+        const category = data[selectedIndex].summary.filter(({ category }) => category === key);
         const value = category?.[0]?.used || 0;
 
         return (
