@@ -31,9 +31,17 @@ export default function Home() {
     );
   };
 
-  const handleMouseClick = () => {
-    // fetchData();
-    setShowPortal(true);
+  const handleMouseMove = () => {
+    if (!showPortal) {
+      // fetchData();
+      setShowPortal(true);
+    }
+  };
+
+  const handleMouseOver = () => {
+    if (showPortal) {
+      setShowPortal(false);
+    }
   };
 
   const fetchData = () => {
@@ -55,10 +63,10 @@ export default function Home() {
 
   return (
     <div className="container relative flex justify-items-start w-full">
-      <div className="bg-white py-8 px-2 w-64">
+      <div className="bg-white py-8 px-2 w-80">
         <Image className="cursor-pointer" src="/logo.png" alt="logo" width={168} height={40} />
         <div className="border-2 p-4 mt-2 rounded-xl">
-          <button className="flex align-middle items-center " onClick={() => handleMouseClick()}>
+          <button className="flex align-middle items-center" onMouseOver={() => handleMouseMove()}>
             <span>Selected Workspace</span>
             <div className="ml-3 pt-1 flex flex-col">
               <Image alt="chevron-up" src="/chevron-up.png" height="15" width="15" />
@@ -70,7 +78,7 @@ export default function Home() {
           {links.map((link) => renderLink(link))} 
         </ul>
       </div>
-      <div className="relative top-24">
+      <div className="relative flex top-24">
         <div className="flex absolute">
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal1" />
           <div className="w-64 m-auto shadow-sm shadow-black/5 z-10" id="modal2" />
@@ -78,6 +86,7 @@ export default function Home() {
           {showPortal && createPortal(<StatisticsModal data={data} />, secondDOMNode, null)}
         </div> 
       </div>
+      <div className="flex w-full" onMouseOver={() => handleMouseOver()} />
     </div>
   )
 }
